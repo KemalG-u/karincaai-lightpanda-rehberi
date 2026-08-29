@@ -203,7 +203,8 @@
     <main id="content">
       <section class="meta" id="m0" aria-label="Rehber metası">
         <p><strong>Rehber sürümü:</strong> v2.1-review · seçilen V1 yönü · <strong>Belge/test inceleme:</strong> 30 Ağustos 2026</p>
-        <p><strong>Test sürümleri:</strong> Hermes v0.20.5 bağlamı · Lightpanda 1.0.0-nightly.9002 · Chrome 146.0.7680.164</p>
+        <p><strong>Test sürümleri:</strong> Hermes v0.20.5 bağlamı · Lightpanda 1.0.0-nightly.9002+1bd957d07 · Chrome 146.0.7680.164</p>
+        <p><strong>Sürüm sınırı:</strong> Bu sonuç sabit Lightpanda build kimliğine aittir; “en güncel nightly” iddiası değildir. Yeni build yayımlandığında test yeniden çalıştırılmalıdır.</p>
         <p><strong>Son kontrollü Lightpanda testi:</strong> 30 Ağustos 2026 · <strong>Yeniden inceleme:</strong> Hermes davranışı, kurulum yolu veya motor sürümü değişirse</p>
       </section>
 
@@ -400,12 +401,14 @@
         <h3>Gerçek URL pilotunda ek kapılar</h3>
         <ul class="risk-list">
           <li><strong>Varsayılan pilot salt okunurdur.</strong> Form gönderme, kayıt oluşturma, silme, ödeme veya e-posta tetikleme yapılmaz. Yazma zorunluysa staging/test hesabı, etkisiz test verisi, açık yazma izni ve temizleme planı gerekir.</li>
+          <li>İzin verilen alan adı ve alt alan adı allowlist olarak yazılmalı. HTTP yönlendirmesi veya üçüncü taraf gömülü içerik listenin dışına çıkarsa görev durmalıdır.</li>
           <li>Test hesabı üretim hesabından ve gerçek kullanıcı oturumundan ayrılmalı.</li>
           <li>Çerez, token, özel URL ve kişisel veri loglara yazılmamalı; hata kayıtları maskelenmeli.</li>
           <li>Yetki, görevin gerektirdiği en küçük kapsamla sınırlandırılmalı.</li>
           <li>Beklenen alanlar, kayıt sayısı, yinelenen kayıt ve kısmi başarısızlık kabul ölçütleri önceden yazılmalı.</li>
           <li>Kritik adım Chrome'a düşerse sonuç sistem başarısı sayılır; Lightpanda-only başarı sayılmaz.</li>
         </ul>
+        <p><strong>Örnek karar eşiği:</strong> Bu sayılar evrensel değildir; pilot başlamadan önce görev briefine yazılır. Örneğin kritik alanlarda %100 doğruluk, kritik adımlarda %0 fallback, en fazla %1 hata ve süre veya tepe RAM'de en az %20 iyileşme aranabilir. Eşiklerden biri karşılanmazsa pilot durur ve özgün motor değeri geri yüklenir.</p>
         <p><strong>Telemetri sınırı:</strong> Telemetriyi kapatmak; uygulama loglarını, proxy/DNS kayıtlarını, hedef site kayıtlarını, CI çıktısını veya hata raporlarını korumaz. Bunlar ayrı veri akışlarıdır ve ayrı denetlenmelidir.</p>
         <div class="claim" aria-label="Telemetri ve ürün olgunluğu kanıt etiketi">
           <p><strong>Resmî özellik / sınır:</strong> Telemetri kapatma yolu, Beta/WIP uyarısı ve kurulumla ilişkili koşullar gerçek denemeden önce kontrol edilmelidir.</p>

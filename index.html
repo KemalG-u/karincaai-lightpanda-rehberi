@@ -225,7 +225,7 @@
           <p><strong>Bu rehberin tamamladığı iş:</strong> tanım + uygunluk + gerekçeli karar + güvenli deney planı.</p>
           <p><strong>Dayanak:</strong> resmî Hermes/Lightpanda belgeleri, üretici benchmarkı ve KarıncaAI'nin izole VPS A/B testi.</p>
           <p><strong>Yerel olarak doğrulanan:</strong> Aynı 20 JavaScript sayfasında iki motor da 20/20 başarılı oldu; Lightpanda medyan 4,992 ms, Chrome 25,129 ms ölçüldü.</p>
-          <p><strong>Bellek gözlemi:</strong> Lightpanda yaklaşık 24 MB; izole Chrome process-tree başlangıcı yaklaşık 1.001 MB idi.</p>
+          <p><strong>Bellek gözlemi:</strong> Lightpanda yaklaşık 24 MB; izole Chrome process-tree başlangıcı 1.000,809 MB idi.</p>
           <p><strong>Kapsam dışı:</strong> Gerçek internet sitesi uyumluluğu, screenshot/PDF/dosya yükleme, kalıcı Hermes ayarı, sonuç garantisi ve X yayını.</p>
         </div>
       </section>
@@ -294,7 +294,7 @@
           <dt>Başlangıç</dt><dd>İzole Linux VPS ortamı; sürekli açık Chrome ve Lightpanda CDP motorları; aynı 20 yerel JavaScript sayfası; her sayfada 200 DOM öğesi ve görünür başarı işareti.</dd>
           <dt>Tahmin</dt><dd>Metin/DOM ağırlıklı bu görevde Lightpanda'nın daha düşük motor yükü ve daha kısa gezinme süresi göstermesi; iki motorun da aynı çıktıyı üretmesi beklenir.</dd>
           <dt>Eylem</dt><dd>Motor sırasını her turda değiştirerek her iki motoru 20 kez aynı görev koşulunda çalıştır.</dd>
-          <dt>Gözlenen sonuç</dt><dd>İki motor da 20/20 başarılı oldu. Medyan süre Lightpanda 4,992 ms, Chrome 25,129 ms; başlangıç process-tree RSS yaklaşık 24 MB ve 1.001 MB idi.</dd>
+          <dt>Gözlenen sonuç</dt><dd>İki motor da 20/20 başarılı oldu. Medyan süre Lightpanda 4,992 ms, Chrome 25,129 ms; başlangıç process-tree RSS yaklaşık 24 MB ve 1.000,809 MB idi.</dd>
           <dt>Beklenenle eşleşme</dt><dd>Evet, kontrollü yerel iş yükünde. Bu eşleşme gerçek internet sitesi, görsel iş veya üretim uyumluluğu garantisi değildir.</dd>
           <dt>İlk güvenli kontrol</dt><dd>Üretim öncesinde izinli gerçek URL kümesi, görev başarısı, hata oranı, fallback sayısı ve geri alma yolu ayrı test edilmelidir.</dd>
           <dt>Durma</dt><dd>Gerçek görev başarısı düşerse veya görsel/dosya ihtiyacı kritikse <code>auto</code>/Chrome yolunu koru.</dd>
@@ -408,7 +408,7 @@
           <li>Beklenen alanlar, kayıt sayısı, yinelenen kayıt ve kısmi başarısızlık kabul ölçütleri önceden yazılmalı.</li>
           <li>Kritik adım Chrome'a düşerse sonuç sistem başarısı sayılır; Lightpanda-only başarı sayılmaz.</li>
         </ul>
-        <p><strong>Örnek karar eşiği:</strong> Bu sayılar evrensel değildir; pilot başlamadan önce görev briefine yazılır. Örneğin kritik alanlarda %100 doğruluk, kritik adımlarda %0 fallback, en fazla %1 hata ve süre veya tepe RAM'de en az %20 iyileşme aranabilir. Eşiklerden biri karşılanmazsa pilot durur ve özgün motor değeri geri yüklenir.</p>
+        <p><strong>Örnek karar eşiği:</strong> Bu sayılar evrensel değildir; pilot başlamadan önce görev briefine yazılır ve süre ile tepe RAM'den hangisinin öncelikli olduğu seçilir. Örneğin kritik alanlarda %100 doğruluk, kritik adımlarda %0 fallback, en fazla %1 hata ve seçilen öncelikli ölçütte en az %20 iyileşme aranabilir. Eşiklerden biri karşılanmazsa pilot durur ve özgün motor değeri geri yüklenir.</p>
         <p><strong>Telemetri sınırı:</strong> Telemetriyi kapatmak; uygulama loglarını, proxy/DNS kayıtlarını, hedef site kayıtlarını, CI çıktısını veya hata raporlarını korumaz. Bunlar ayrı veri akışlarıdır ve ayrı denetlenmelidir.</p>
         <div class="claim" aria-label="Telemetri ve ürün olgunluğu kanıt etiketi">
           <p><strong>Resmî özellik / sınır:</strong> Telemetri kapatma yolu, Beta/WIP uyarısı ve kurulumla ilişkili koşullar gerçek denemeden önce kontrol edilmelidir.</p>

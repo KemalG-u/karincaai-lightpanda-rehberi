@@ -261,6 +261,7 @@
           <thead><tr><th scope="col">Sade parça</th><th scope="col">Teknik adı</th><th scope="col">İşi</th><th scope="col">Bununla karıştırma</th></tr></thead>
           <tbody>
             <tr><th scope="row">Tarayıcı motoru</th><td>browser engine</td><td>Sayfayı açıp web işini yürütür.</td><td>Ekranda görünen pencere değildir.</td></tr>
+            <tr><th scope="row">Tarayıcı sürücüsü</th><td>agent-browser</td><td>Hermes komutlarını seçilen motora iletir.</td><td>Lightpanda motorunun kendisi değildir.</td></tr>
             <tr><th scope="row">Geri dönüş</th><td>Chrome fallback</td><td>Desteklenmeyen işi Chrome yoluna taşır.</td><td>Başarı garantisi değildir.</td></tr>
             <tr><th scope="row">Görev kanıtı</th><td>observable outcome</td><td>Asıl işin doğru tamamlandığını gösterir.</td><td>Komutun hata vermemesi değildir.</td></tr>
           </tbody>
@@ -280,6 +281,8 @@
           </tbody>
         </table>
         <p><strong>Yanlış kavram:</strong> Bir ayar satırı motoru kurar. <strong>Düzeltme:</strong> Ayar rota levhasıdır; motor ve sürücü ayrıca bulunmalıdır.</p>
+        <p><strong>Fallback nasıl okunmalı?</strong> Lightpanda bir komutu desteklemez veya hata verirse Hermes aynı işi Chrome ile yeniden deneyebilir. Chrome görevi tamamlarsa bu <em>sistem başarısıdır</em>; Lightpanda'nın o adımı başardığı anlamına gelmez. Üretim pilotunda hangi adımın neden Chrome'a geçtiği ayrıca kaydedilmelidir.</p>
+        <p>Ekran görüntüsü ve dosya yükleme yalnız bilinen örneklerdir. Desteklenmeyen Web API'leri, oturum akışları, siteye özgü JavaScript ve DOM farklılıkları da Lightpanda yolunu bozabilir.</p>
         <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
       </section>
 
@@ -361,6 +364,7 @@
           <img src="assets/benchmark-vps.png" alt="KarıncaAI VPS testinde Lightpanda 4,992 milisaniye, Chrome 25,129 milisaniye medyan süre; başlangıç process-tree belleği Lightpanda 24,176 MB ve Chrome 1.000,809 MB.">
           <figcaption>Aynı VPS ve aynı 20 görev. Ham veri ve yöntem proje içindeki `benchmarks/lightpanda-vs-chrome` klasöründe.</figcaption>
         </figure>
+        <p><strong>Test protokolü:</strong> Motorlar sürekli açık tutuldu; aynı 20 yerel sayfa kullanıldı; her sayfa 200 DOM öğesi ve <code>data-ready=true</code> kanıtı üretti; motor sırası her turda değiştirildi; süre medyan/p95 ile, bellek bütün süreç ağacının RSS toplamıyla ölçüldü.</p>
         <table class="data-table compare-table">
           <caption>Aynı görevde ölçülmesi gereken ortak satırlar</caption>
           <thead><tr><th scope="col">Ölçüt</th><th scope="col">Lightpanda</th><th scope="col">Chrome/auto</th><th scope="col">Kanıt sahibi ve koşulu</th></tr></thead>
@@ -390,6 +394,14 @@
           <li>URL'ler için izin, robots.txt, kullanım şartları ve hız sınırı kontrol edildi mi?</li>
           <li>Özel hesap, çerez, anahtar veya özel URL örneğe girmiyor mu?</li>
         </ol>
+        <h3>Gerçek URL pilotunda ek kapılar</h3>
+        <ul class="risk-list">
+          <li>Test hesabı üretim hesabından ve gerçek kullanıcı oturumundan ayrılmalı.</li>
+          <li>Çerez, token, özel URL ve kişisel veri loglara yazılmamalı; hata kayıtları maskelenmeli.</li>
+          <li>Yetki, görevin gerektirdiği en küçük kapsamla sınırlandırılmalı.</li>
+          <li>Beklenen alanlar, kayıt sayısı, yinelenen kayıt ve kısmi başarısızlık kabul ölçütleri önceden yazılmalı.</li>
+          <li>Kritik adım Chrome'a düşerse sonuç sistem başarısı sayılır; Lightpanda-only başarı sayılmaz.</li>
+        </ul>
         <div class="claim" aria-label="Telemetri ve ürün olgunluğu kanıt etiketi">
           <p><strong>Resmî özellik / sınır:</strong> Telemetri kapatma yolu, Beta/WIP uyarısı ve kurulumla ilişkili koşullar gerçek denemeden önce kontrol edilmelidir.</p>
           <p><strong>Sahip:</strong> Lightpanda belgeleri · <strong>Koşul:</strong> test edilen nightly sürüm · <strong>Kaynak:</strong> <a href="https://lightpanda.io/docs/open-source/installation">kurulum belgesi</a> · <strong>KarıncaAI durumu:</strong> telemetri kapalı geçici VPS binary ile izole test yapıldı; Hermes kalıcı ayarı değiştirilmedi.</p>
@@ -401,6 +413,7 @@
         <h2 id="success-stop" tabindex="-1">Çalıştığını nasıl kanıtlarsın, ne zaman durursun?</h2>
         <p><strong>Başarı kanıtı:</strong> süre + tepe RAM + görev başarısı + hata oranı + fallback sayısı. Yalnız ayarın hata vermemesi başarı değildir.</p>
         <p><strong>Yakın hata:</strong> ayar <code>lightpanda</code>, fakat motor bulunmuyor. <strong>İlk güvenli kontrol:</strong> binary ve sürücü varlığını doğrula. <strong>Durma:</strong> kurulumu körlemesine tekrarlama; <code>auto</code> yolunu koru.</p>
+        <p><strong>Geri alma örneği:</strong> Değişiklikten önce mevcut <code>browser.engine</code> değerini kaydet. Pilot yalnız ayrılmış görev/URL kümesinde çalışsın. Kritik hata, beklenmeyen veri erişimi veya görev başarısında düşüş olursa pilotu durdur; motoru <code>hermes config set browser.engine auto</code> ile önceki güvenli yola döndür ve Chrome göreviyle sonucu doğrula.</p>
         <div class="feedback">
           <button class="feedback-button" id="feedback-button" type="button" aria-expanded="false" aria-controls="feedback-status">Geri bildirim sınırını göster</button>
           <p class="feedback-status" id="feedback-status" hidden>Bu yerel demoda geri bildirim kaydedilmez. Bir kayıt hedefi yazılıp aynı kayıt kimliği geri okunmadıkça “Not edildi” denmez.</p>
@@ -485,9 +498,9 @@
       }
 
       const questions = [
-        { id: 'q1', text: 'Desteklenen Linux/WSL2 ortamı var mı?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } },
+        { id: 'q1', text: 'Linux/WSL2, Lightpanda binary, agent-browser ve uygun Hermes sürümü birlikte doğrulandı mı?', labels: { yes: 'Evet, hepsi doğrulandı', no: 'Hayır, en az biri eksik', unknown: 'Bilmiyorum' } },
         { id: 'q2', text: 'Görevin kritik görsel, dosya veya tam uyum ihtiyacı var mı?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } },
-        { id: 'q3', text: 'Görev tekrarlı mı ve gerçek kaynak darboğazı ölçüldü mü?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } },
+        { id: 'q3', text: 'Görev tekrarlı mı ve Chrome darboğazı gerçekten ölçüldü mü?', labels: { yes: 'Evet, ikisi de', no: 'Tekrarlı ama ölçülmedi', unknown: 'Hayır veya bilmiyorum' } },
         { id: 'q4', text: 'Aynı görev ve URL kümesiyle geri alınabilir A/B yapılabilir mi?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } }
       ];
       const answers = [];

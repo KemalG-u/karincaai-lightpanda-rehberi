@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lightpanda için görev uygunluğu, kanıt sınırı ve güvenli deney planı kılavuzu.">
+  <title>Lightpanda nedir, ne zaman kullanılır? — KarıncaAI</title>
+  <link rel="canonical" href="https://kemalg-u.github.io/karincaai-lightpanda-rehberi/">
+  <link rel="icon" href="data:,">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lightpanda nedir, ne zaman kullanılır?">
+  <meta property="og:description" content="Lightpanda ve Chrome arasındaki farkı, gerçek KarıncaAI VPS testiyle anlatan başlangıç kılavuzu.">
+  <meta property="og:url" content="https://kemalg-u.github.io/karincaai-lightpanda-rehberi/">
+  <meta property="og:image" content="https://kemalg-u.github.io/karincaai-lightpanda-rehberi/assets/benchmark-vps.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root {
+      --ink: #17211f;
+      --muted: #53605d;
+      --line: #cbd3ce;
+      --soft: #f3f6f4;
+      --paper: #ffffff;
+      --accent: #a4402b;
+      --accent-dark: #742c1c;
+      --max: 742px;
+      --side: 220px;
+      --gutter: clamp(18px, 4vw, 52px);
+      --radius: 5px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", "Segoe UI Variable", Arial, sans-serif;
+      font-size: clamp(18px, 1.2vw, 19px);
+      line-height: 1.62;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--accent-dark); text-decoration-thickness: 2px; text-underline-offset: 0.14em; }
+    a:hover { color: var(--ink); }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    button { font: inherit; }
+    code, kbd { font-family: Consolas, "Courier New", monospace; font-size: .91em; overflow-wrap: anywhere; word-break: break-word; }
+    :target { scroll-margin-top: 1.5rem; }
+
+    .skip-link {
+      position: fixed; left: .75rem; top: .75rem; z-index: 10;
+      padding: .45rem .7rem; background: var(--ink); color: #fff;
+      transform: translateY(-150%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .page-head { border-bottom: 1px solid var(--line); }
+    .head-inner, .layout, .footer-inner { max-width: 1120px; margin: 0 auto; padding-inline: var(--gutter); }
+    .head-inner { padding-block: 18px 14px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .logo { display: block; width: min(190px, 48vw); height: auto; }
+    .category { margin: 0; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); text-align: right; }
+
+    .layout { display: grid; grid-template-columns: minmax(0, var(--max)) minmax(0, var(--side)); justify-content: space-between; gap: clamp(30px, 7vw, 78px); padding-block: 36px 64px; }
+    main { min-width: 0; }
+    .meta { padding-bottom: 18px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .82rem; line-height: 1.45; }
+    .meta p { margin: 0 0 .35rem; }
+    .meta strong { color: var(--ink); }
+
+    h1, h2, h3 { color: var(--ink); line-height: 1.18; text-wrap: pretty; }
+    h1 { margin: 28px 0 16px; max-width: 18ch; font-size: clamp(2rem, 4.2vw, 3.28rem); letter-spacing: -.035em; }
+    h2 { margin: 56px 0 16px; font-size: clamp(1.42rem, 2.6vw, 1.9rem); letter-spacing: -.02em; }
+    h3 { margin: 26px 0 8px; font-size: 1.12rem; }
+    p, li { max-width: 75ch; }
+    p { margin: 0 0 1.05rem; }
+    .lead { margin-bottom: 1.05rem; font-size: 1.08em; }
+    .technical { color: var(--muted); font-size: .92em; }
+    .compact-list { margin: .55rem 0 1.35rem; padding-left: 1.3rem; }
+    .compact-list li { margin: .4rem 0; }
+    .list-plain { list-style: none; padding: 0; margin: 0; }
+    .list-plain li { padding: .36rem 0; border-bottom: 1px solid var(--line); }
+    .section-return { display: inline-block; margin-top: 1rem; font-size: .83rem; }
+    .key { font-weight: 700; }
+
+    .scope { margin-top: 1.3rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 13px 0 8px; font-size: .9rem; }
+    .scope p { margin-bottom: .45rem; }
+    .quick-start { margin: 1.35rem 0; padding: 1rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; }
+    .quick-start h2 { margin: 0 0 .55rem; font-size: 1.18rem; }
+    .quick-start ol { margin: 0; padding-left: 1.25rem; }
+    .quick-start li { margin: .3rem 0; }
+    .map { margin-top: 0; padding: 0; }
+    .map ol { margin: 0; padding-left: 1.35rem; }
+    .map li { margin: .28rem 0; }
+    .map-toggle { display: none; }
+
+    .data-table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .9rem; line-height: 1.45; }
+    .data-table caption { padding: 0 0 .55rem; text-align: left; font-weight: 700; color: var(--ink); }
+    .data-table th, .data-table td { padding: .66rem .62rem; vertical-align: top; text-align: left; border-bottom: 1px solid var(--line); }
+    .data-table thead th { background: var(--soft); font-size: .84rem; }
+    .data-table tbody th { font-weight: 700; }
+
+    .example { margin-top: 12px; padding: 18px clamp(16px, 3vw, 28px); border: 1px solid var(--line); border-radius: var(--radius); background: #fbfcfb; }
+    .example h2 { margin-top: 0; }
+    .example dl { margin: 0; }
+    .example dt { margin-top: .85rem; font-weight: 750; }
+    .example dd { margin: .15rem 0 0; }
+    .counterexample { margin-top: 16px; padding: 0 0 0 18px; border-left: 3px solid var(--accent); }
+    .counterexample h2 { margin-top: 0; }
+
+    .decision-tool { margin-top: 1rem; border: 2px solid var(--ink); padding: clamp(18px, 4vw, 30px); background: #fff; }
+    .decision-topline { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; color: var(--muted); font-size: .86rem; }
+    .decision-tool h3 { margin-top: 14px; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+    .answer-set { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .answer-set button, .back-button, .feedback-button, .map-toggle {
+      min-height: 44px; padding: .55rem .82rem; border: 1px solid var(--ink); border-radius: 3px; background: #fff; color: var(--ink); cursor: pointer;
+    }
+    .answer-set button:hover, .back-button:hover, .feedback-button:hover, .map-toggle:hover { background: var(--soft); }
+    .answer-set button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+    .back-button { margin-top: 16px; }
+    .result { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .result[hidden] { display: none; }
+    .result .decision { color: var(--accent-dark); font-weight: 800; }
+    .result dl { margin: 0; }
+    .result dt { margin-top: .8rem; font-weight: 750; }
+    .result dd { margin: .1rem 0 0; }
+    .js-note { font-size: .83rem; color: var(--muted); }
+    .static-summary { margin-top: 18px; }
+    .static-summary summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; }
+    .static-summary table { margin-top: .4rem; }
+
+    .claim { margin: 18px 0; padding: 13px 15px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--soft); font-size: .87rem; line-height: 1.5; }
+    .claim p { margin: 0 0 .45rem; }
+    .claim p:last-child { margin-bottom: 0; }
+    .claim strong { color: var(--ink); }
+    .benchmark-figure { margin: 1.2rem 0; }
+    .benchmark-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+    .benchmark-figure figcaption { margin-top: .55rem; color: var(--muted); font-size: .82rem; }
+    .risk-list { padding-left: 1.25rem; }
+    .risk-list li { margin: .55rem 0; }
+    .feedback { margin-top: 1.3rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+    .feedback-status { margin-top: .6rem; font-size: .9rem; color: var(--muted); }
+
+    aside { min-width: 0; }
+    .rail { position: sticky; top: 18px; border-left: 1px solid var(--line); padding-left: 18px; font-size: .82rem; line-height: 1.35; }
+    .rail p { margin: 0 0 .45rem; font-weight: 750; }
+    .rail ol { margin: 0; padding-left: 1.05rem; }
+    .rail li { margin: .45rem 0; }
+    .rail a { text-decoration-thickness: 1px; }
+
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .footer-inner { padding-block: 24px 38px; }
+    .footer-inner p { margin-bottom: .45rem; }
+
+    @media (max-width: 850px) {
+      .layout { display: block; padding-top: 24px; }
+      aside { display: none; }
+      h2 { margin-top: 44px; }
+      .map-toggle { display: inline-flex; align-items: center; width: 100%; justify-content: space-between; margin-bottom: .55rem; }
+      .map-toggle::after { content: "+"; font-size: 1.3em; }
+      .map-toggle[aria-expanded="true"]::after { content: "−"; }
+      .map ol[hidden] { display: none; }
+      .map ol { border-left: 1px solid var(--line); padding-left: 1.15rem; }
+    }
+
+    @media (max-width: 560px) {
+      body { line-height: 1.56; }
+      .head-inner { padding-block: 12px; justify-content: flex-start; }
+      .category { display: none; }
+      h1 { margin-top: 22px; font-size: clamp(1.9rem, 10vw, 2.55rem); }
+      h2 { margin-top: 38px; }
+      .scope { font-size: .86rem; }
+      .quick-start { display: block; }
+      .quick-start > div + nav { margin-top: 1.1rem; }
+      .data-table { font-size: .85rem; }
+      .data-table:not(.compare-table) { width: 100%; max-width: 100%; table-layout: fixed; }
+      .data-table:not(.compare-table) th, .data-table:not(.compare-table) td { padding: .42rem .3rem; overflow-wrap: anywhere; word-break: break-word; }
+      .compare-table thead { display: none; }
+      .compare-table, .compare-table tbody, .compare-table tr, .compare-table th, .compare-table td { display: block; width: 100%; }
+      .compare-table tr { padding: .55rem 0; border-bottom: 1px solid var(--line); }
+      .compare-table th, .compare-table td { padding: .26rem 0; border: 0; }
+      .compare-table td::before { content: attr(data-label); display: block; color: var(--muted); font-size: .78rem; font-weight: 750; text-transform: uppercase; letter-spacing: .03em; }
+      .example { padding: 17px; }
+      .decision-tool { margin-inline: -2px; }
+      .answer-set { display: grid; grid-template-columns: 1fr; }
+      .answer-set button { width: 100%; text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+    @media print { body { font-size: 12pt; } .page-head, aside, .skip-link, .map-toggle, .answer-set, .back-button, .feedback { display: none !important; } .layout { display: block; max-width: none; padding: 0; } main { max-width: none; } .map ol { display: block !important; } a { color: #000; } .decision-tool { border: 1px solid #000; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Ana içeriğe geç</a>
+  <header class="page-head">
+    <div class="head-inner">
+      <img class="logo" src="assets/b2-signature.png" alt="KarıncaAI">
+      <p class="category">KarıncaAI görev kılavuzu<br>Lightpanda</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main id="content">
+      <section class="meta" id="m0" aria-label="Rehber metası">
+        <p><strong>Rehber sürümü:</strong> v2.1-review · seçilen V1 yönü · <strong>Belge/test inceleme:</strong> 30 Ağustos 2026</p>
+        <p><strong>Test sürümleri:</strong> Hermes v0.20.5 bağlamı · Lightpanda 1.0.0-nightly.9002 · Chrome 146.0.7680.164</p>
+        <p><strong>Son kontrollü Lightpanda testi:</strong> 30 Ağustos 2026 · <strong>Yeniden inceleme:</strong> Hermes davranışı, kurulum yolu veya motor sürümü değişirse</p>
+      </section>
+
+      <section id="m1" aria-labelledby="page-title">
+        <h1 id="page-title">Lightpanda nedir, ne zaman kullanılır?</h1>
+        <p class="lead">Lightpanda, ekranda tarayıcı penceresi çizmeden web otomasyonu için çalışan bir tarayıcı motorudur. Tekrarlanan, metin ve DOM ağırlıklı web işlerinde tam Chrome motorunun başlangıç ve bellek maliyetini azaltmayı hedefler. Linux/WSL2 üzerinde kaynak baskısı gerçekten ölçülen ve görsel özellik istemeyen görevlerde adaydır. Ekran görüntüsü, PDF, dosya yükleme, kalıcı profil veya tam Chrome uyumu kritikse tek başına uygun değildir; Chrome/auto yolu korunur.</p>
+        <p class="technical"><em>Teknik karşılığı: Zig ile yazılmış, headless (başsız) web otomasyonuna odaklanan ve Hermes'te desteklenmeyen işlerde Chrome geri dönüşüyle kullanılabilen bir browser engine'dir (tarayıcı motoru).</em></p>
+        <div class="quick-start" aria-label="Bu yazıda öğreneceklerin ve hızlı bölüm haritası">
+          <div><h2>Bu yazıda ne yapabileceksin?</h2><ol><li>Lightpanda'yı sade bir cümleyle tanımla.</li><li>Uygun ve uygun olmayan görevi ayır.</li><li>Kendi yolunu gerekçesiyle seç.</li></ol></div>
+          <nav aria-label="Hızlı bölüm haritası"><h2>Önündeki yol</h2><ol><li><a href="#system">Sistem</a></li><li><a href="#worked-example">Örnek</a></li><li><a href="#decision">Karar</a></li><li><a href="#comparison">Karşılaştırma</a></li><li><a href="#safety">Güvenli sınır</a></li></ol></nav>
+        </div>
+        <p>Chrome'u her yük için donanımlı bir kamyon, Lightpanda'yı belirli hafif işler için servis aracı gibi düşünebilirsin. Buradaki karşılık görev türünün motoru seçmesi, desteklenmeyen ihtiyacın geri dönüşe gitmesi ve tamamlanan gerçek işin kanıt sayılmasıdır. Benzetme hız veya RAM sonucu kanıtlamaz; o sonuçlar aynı görev ve URL kümesiyle ölçülür.</p>
+        <ul class="compact-list">
+          <li><span class="key">Uygun aday:</span> Linux VPS'te sık tekrarlanan, metin/DOM okuyan, ekran görüntüsü istemeyen ve Chrome RAM baskısı ölçülmüş görev.</li>
+          <li><span class="key">Yakın karşı örnek:</span> Aynı görev ekran görüntüsü üretmek zorunda. Tek ayırıcı koşul görsel çıktı ihtiyacıdır; “web işi” olması yeterli değildir.</li>
+        </ul>
+        <div class="scope" aria-label="Kapsam ve güven sözleşmesi">
+          <p><strong>Bu rehberin tamamladığı iş:</strong> tanım + uygunluk + gerekçeli karar + güvenli deney planı.</p>
+          <p><strong>Dayanak:</strong> resmî Hermes/Lightpanda belgeleri, üretici benchmarkı ve KarıncaAI'nin izole VPS A/B testi.</p>
+          <p><strong>Yerel olarak doğrulanan:</strong> Aynı 20 JavaScript sayfasında iki motor da 20/20 başarılı oldu; Lightpanda medyan 4,992 ms, Chrome 25,129 ms ölçüldü.</p>
+          <p><strong>Bellek gözlemi:</strong> Lightpanda yaklaşık 24 MB; izole Chrome process-tree başlangıcı yaklaşık 1.001 MB idi.</p>
+          <p><strong>Kapsam dışı:</strong> Gerçek internet sitesi uyumluluğu, screenshot/PDF/dosya yükleme, kalıcı Hermes ayarı, sonuç garantisi ve X yayını.</p>
+        </div>
+      </section>
+
+      <section id="m2" aria-labelledby="outcomes-title">
+        <h2 id="outcomes-title">Bu yazıda ne yapabileceksin?</h2>
+        <ol class="compact-list">
+          <li>Lightpanda'yı bir sade cümleyle tanımlayabilirsin.</li>
+          <li>Metin ağırlıklı uygun aday ile görsel özellik isteyen yakın karşı örneği ayırabilirsin.</li>
+          <li>Kendi görevin için üç yoldan birini seçip gerekçelendirebilirsin.</li>
+          <li>Üretici benchmarkını KarıncaAI yerel testinden ayırabilirsin.</li>
+          <li>Deneme öncesi üç önkoşulu ve güvenli durma koşulunu yazabilirsin.</li>
+        </ol>
+      </section>
+
+      <section id="m3" class="map" aria-labelledby="map-title">
+        <h2 id="map-title">Bölüm haritası</h2>
+        <button class="map-toggle" type="button" aria-expanded="false" aria-controls="map-list">Bölümleri göster</button>
+        <ol id="map-list">
+          <li><a href="#system">Sistem nasıl çalışır?</a></li>
+          <li><a href="#worked-example">Tam örnek ve tek-koşullu karşı örnek</a></li>
+          <li><a href="#decision">4 soruda kendi yolunu seç</a></li>
+          <li><a href="#comparison">Lightpanda ve Chrome'u aynı ölçütlerde karşılaştır</a></li>
+          <li><a href="#safety">Güvenli deney sınırını çıkar</a></li>
+          <li><a href="#success-stop">Çalıştığını nasıl kanıtlarsın, ne zaman durursun?</a></li>
+          <li><a href="#recall">Kararını geri çağır ve başka göreve aktar</a></li>
+        </ol>
+      </section>
+
+      <section id="m4" aria-labelledby="before-title">
+        <h2 id="before-title">Başlamadan önce üç parça</h2>
+        <table class="data-table">
+          <caption>Kararı taşımak için gereken temel kavramlar</caption>
+          <thead><tr><th scope="col">Sade parça</th><th scope="col">Teknik adı</th><th scope="col">İşi</th><th scope="col">Bununla karıştırma</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Tarayıcı motoru</th><td>browser engine</td><td>Sayfayı açıp web işini yürütür.</td><td>Ekranda görünen pencere değildir.</td></tr>
+            <tr><th scope="row">Geri dönüş</th><td>Chrome fallback</td><td>Desteklenmeyen işi Chrome yoluna taşır.</td><td>Başarı garantisi değildir.</td></tr>
+            <tr><th scope="row">Görev kanıtı</th><td>observable outcome</td><td>Asıl işin doğru tamamlandığını gösterir.</td><td>Komutun hata vermemesi değildir.</td></tr>
+          </tbody>
+        </table>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m5" aria-labelledby="system">
+        <h2 id="system" tabindex="-1">Sistem nasıl çalışır?</h2>
+        <p>İlişki basittir: görev motoru seçer; motor desteği kontrol edilir; ihtiyaç desteklenmiyorsa Chrome geri dönüşü devreye girer; sonunda komut değil, gözlenebilir görev sonucu değerlendirilir.</p>
+        <table class="data-table">
+          <caption>Görevden kanıta düz ilişki</caption>
+          <tbody>
+            <tr><th scope="row">Görev</th><td>Metin/DOM okuma, görsel çıktı ihtiyacı ve tekrarlama sıklığı seçimi etkiler.</td></tr>
+            <tr><th scope="row">Motor</th><td>Lightpanda aday olabilir; fakat motorun desteklemediği kritik ihtiyaçta Chrome/auto yolu kalır.</td></tr>
+            <tr><th scope="row">Kanıt</th><td>Süre, tepe RAM, görev başarısı, hata oranı ve fallback sayısı birlikte okunur.</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Yanlış kavram:</strong> Bir ayar satırı motoru kurar. <strong>Düzeltme:</strong> Ayar rota levhasıdır; motor ve sürücü ayrıca bulunmalıdır.</p>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m6" class="example" aria-labelledby="worked-example">
+        <h2 id="worked-example" tabindex="-1">Tam örnek ve tek-koşullu karşı örnek</h2>
+        <dl>
+          <dt>Amaç</dt><dd>Her beş dakikada metin toplayan Linux VPS görevi için sonraki güvenli adımı seçmek.</dd>
+          <dt>Başlangıç</dt><dd>İzole Linux VPS ortamı; sürekli açık Chrome ve Lightpanda CDP motorları; aynı 20 yerel JavaScript sayfası; her sayfada 200 DOM öğesi ve görünür başarı işareti.</dd>
+          <dt>Tahmin</dt><dd>Metin/DOM ağırlıklı bu görevde Lightpanda'nın daha düşük motor yükü ve daha kısa gezinme süresi göstermesi; iki motorun da aynı çıktıyı üretmesi beklenir.</dd>
+          <dt>Eylem</dt><dd>Motor sırasını her turda değiştirerek her iki motoru 20 kez aynı görev koşulunda çalıştır.</dd>
+          <dt>Gözlenen sonuç</dt><dd>İki motor da 20/20 başarılı oldu. Medyan süre Lightpanda 4,992 ms, Chrome 25,129 ms; başlangıç process-tree RSS yaklaşık 24 MB ve 1.001 MB idi.</dd>
+          <dt>Beklenenle eşleşme</dt><dd>Evet, kontrollü yerel iş yükünde. Bu eşleşme gerçek internet sitesi, görsel iş veya üretim uyumluluğu garantisi değildir.</dd>
+          <dt>İlk güvenli kontrol</dt><dd>Üretim öncesinde izinli gerçek URL kümesi, görev başarısı, hata oranı, fallback sayısı ve geri alma yolu ayrı test edilmelidir.</dd>
+          <dt>Durma</dt><dd>Gerçek görev başarısı düşerse veya görsel/dosya ihtiyacı kritikse <code>auto</code>/Chrome yolunu koru.</dd>
+        </dl>
+        <div class="counterexample">
+          <h3>Tek koşul değişince</h3>
+          <p>Aynı görev, VPS, sıklık, RAM şüphesi ve URL kümesi korunur. Yalnız görev her sayfanın ekran görüntüsünü üretmek zorunda olur.</p>
+          <p><strong>Yeni karar:</strong> Chrome/auto yolunda kal. <strong>Neden:</strong> Görsel çıktı görevin başarı koşuludur; hafif motor adaylığından daha belirleyicidir. “Metin de topluyor” benzerliği bu tek kritik koşulu örtmez.</p>
+        </div>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m8" aria-labelledby="decision">
+        <h2 id="decision" tabindex="-1">4 soruda kendi yolunu seç</h2>
+        <p>Bu araç kurulum önermez. Cevapların yalnız güvenli bir sonraki adımı belirler; geri dönüp her cevabı değiştirebilirsin.</p>
+        <div class="decision-tool" id="decision-tool" data-step="0">
+          <div class="decision-topline"><span id="step-count">Soru 1 / 4</span><span id="answer-summary">Henüz cevap yok</span></div>
+          <h3 id="question-heading" tabindex="-1">Desteklenen Linux/WSL2 ortamı var mı?</h3>
+
+          <div class="answer-set" id="answer-set" aria-label="Soru cevapları">
+            <button type="button" data-answer="yes" aria-pressed="false">Evet</button>
+            <button type="button" data-answer="no" aria-pressed="false">Hayır</button>
+            <button type="button" data-answer="unknown" aria-pressed="false">Bilmiyorum</button>
+          </div>
+          <button class="back-button" id="back-button" type="button" hidden>Önceki cevaba dön</button>
+          <div class="result" id="decision-result" hidden aria-labelledby="result-title">
+            <h3 id="result-title" tabindex="-1">Karar özeti</h3>
+            <p class="decision" id="result-path"></p>
+            <dl>
+              <dt>Cevap özeti</dt><dd id="result-answers"></dd>
+              <dt>Gerekçe</dt><dd id="result-reason"></dd>
+              <dt>Sonraki güvenli adım</dt><dd id="result-next"></dd>
+              <dt>Durma / geri dönüş koşulu</dt><dd id="result-stop"></dd>
+            </dl>
+          </div>
+
+          <p class="js-note">JavaScript kapalıysa aşağıdaki statik karar özeti bütün yolları gösterir.</p>
+          <details class="static-summary">
+            <summary>Statik karar özeti: bütün yollar</summary>
+            <table class="data-table">
+              <caption>JS olmadan okunabilen yol özeti</caption>
+              <thead><tr><th scope="col">Koşul</th><th scope="col">Yol</th><th scope="col">Güvenli sonraki adım</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Desteklenen Linux/WSL2 yok veya bilinmiyor</th><td>Önce ölç ve ortamı hazırla</td><td>Ortam/sürüm uygunluğunu salt-okunur doğrula; motor ayarını değiştirme.</td></tr>
+                <tr><th scope="row">Kritik görsel, dosya veya tam uyum ihtiyacı var</th><td>Chrome/auto yolunda kal</td><td>Görev kanıtını Chrome ile sürdür; görsel gereksinim kalkmadan motor denemesi planlama.</td></tr>
+                <tr><th scope="row">Görev tekrarlı değil ya da darboğaz ölçülmedi</th><td>Önce ölç ve ortamı hazırla</td><td>Aynı görevde Chrome taban çizgisini, süreyi ve tepe RAM'i kaydet.</td></tr>
+                <tr><th scope="row">Aynı görev/URL kümesiyle geri alınabilir A/B yok veya bilinmiyor</th><td>Önce ölç ve ortamı hazırla</td><td>İzinli URL, başarı ölçütü, süre/RAM alanları ve geri alma yolunu yaz.</td></tr>
+                <tr><th scope="row">Dört koşul da olumlu</th><td>Şimdi deneme planla</td><td>Önce mevcut Chrome/auto yolunu kaydet; sonra kontrollü pilot için ayrı onay iste.</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </div>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m9" aria-labelledby="comparison">
+        <h2 id="comparison" tabindex="-1">Lightpanda ve Chrome'u aynı ölçütlerde karşılaştır</h2>
+        <p>Bu tablo KarıncaAI'nin yerel ve kontrollü iş yükündeki ölçümü gösterir. Gerçek internet siteleri veya görsel görevler için genel performans garantisi vermez.</p>
+        <div class="claim" aria-label="Üretici benchmark kanıt etiketi">
+          <p><strong>Üretici testi:</strong> Lightpanda'nın 933 sayfalık AWS EC2 m5.large ve 25 paralel görev benchmarkı.</p>
+          <p><strong>Sahip:</strong> Lightpanda üreticisi · <strong>Koşul:</strong> yayınlanan AWS iş yükü ve paralellik · <strong>Kaynak:</strong> <a href="https://lightpanda.io/blog/posts/from-local-to-real-world-benchmarks">benchmark yazısı</a> · <strong>KarıncaAI durumu:</strong> çalıştırılmadı; yerel hız/RAM vaadi değildir.</p>
+        </div>
+        <div class="claim" aria-label="KarıncaAI VPS testi kanıt etiketi">
+          <p><strong>KarıncaAI VPS testi:</strong> Aynı 20 yerel JavaScript sayfası, sürekli açık izole CDP motorları, her sayfada 200 DOM öğesi.</p>
+          <p><strong>Sonuç:</strong> 20/20 başarı; Lightpanda medyan 4,992 ms, Chrome 25,129 ms. <strong>Sınır:</strong> İnternet gecikmesi, screenshot, dosya yükleme ve gerçek site uyumluluğu bu testte yok.</p>
+        </div>
+        <figure class="benchmark-figure">
+          <img src="assets/benchmark-vps.png" alt="KarıncaAI VPS testinde Lightpanda 4,992 milisaniye, Chrome 25,129 milisaniye medyan süre; başlangıç process-tree belleği Lightpanda 24,176 MB ve Chrome 1.000,809 MB.">
+          <figcaption>Aynı VPS ve aynı 20 görev. Ham veri ve yöntem proje içindeki `benchmarks/lightpanda-vs-chrome` klasöründe.</figcaption>
+        </figure>
+        <table class="data-table compare-table">
+          <caption>Aynı görevde ölçülmesi gereken ortak satırlar</caption>
+          <thead><tr><th scope="col">Ölçüt</th><th scope="col">Lightpanda</th><th scope="col">Chrome/auto</th><th scope="col">Kanıt sahibi ve koşulu</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Görev türü</th><td data-label="Lightpanda">Metin/DOM ağırlıklı aday</td><td data-label="Chrome/auto">Genel uyum yolu</td><td data-label="Kanıt">Resmî davranış; görev ihtiyacına bağlı</td></tr>
+            <tr><th scope="row">Görsel özellik ihtiyacı</th><td data-label="Lightpanda">Kritikse tek başına uygun değil</td><td data-label="Chrome/auto">Kritik ihtiyacı koruyan yol</td><td data-label="Kanıt">Hermes belgesi; destek ihtiyacına bağlı</td></tr>
+            <tr><th scope="row">Uyumluluk</th><td data-label="Lightpanda">Yerel sentetik DOM görevinde 20/20</td><td data-label="Chrome/auto">Yerel sentetik DOM görevinde 20/20</td><td data-label="Kanıt">Gerçek site ve görsel özellik testi yok</td></tr>
+            <tr><th scope="row">Medyan gezinme + DOM hazır</th><td data-label="Lightpanda">4,992 ms</td><td data-label="Chrome/auto">25,129 ms</td><td data-label="Kanıt">KarıncaAI yerel sentetik test; 20 koşu</td></tr>
+            <tr><th scope="row">Başlangıç process-tree RSS</th><td data-label="Lightpanda">24,176 MB</td><td data-label="Chrome/auto">1.000,809 MB</td><td data-label="Kanıt">KarıncaAI izole VPS motorları</td></tr>
+            <tr><th scope="row">Görev başarısı</th><td data-label="Lightpanda">20/20</td><td data-label="Chrome/auto">20/20</td><td data-label="Kanıt">200 DOM öğesi + data-ready işareti</td></tr>
+            <tr><th scope="row">Chrome geri dönüş sayısı</th><td data-label="Lightpanda">Bu testte ölçülmedi</td><td data-label="Chrome/auto">Uygulanmaz</td><td data-label="Kanıt">Screenshot/PDF yolu sınanmadı</td></tr>
+            <tr><th scope="row">Kurulum/bakım yükü</th><td data-label="Lightpanda">Geçici binary ve CDP sunucusu gerekir</td><td data-label="Chrome/auto">Mevcut çalışan yol korunur</td><td data-label="Kanıt">VPS'te geçici binary test edildi; Hermes kalıcı ayarı değişmedi</td></tr>
+          </tbody>
+        </table>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m10" aria-labelledby="safety">
+        <h2 id="safety" tabindex="-1">Güvenli deney sınırını çıkar</h2>
+        <p>Bu bölüm kurulum öğretmez. Denemeden önce geç/kal kapılarını görünür yapar; kritik bir koşul eksikse “deneme hazır” sonucu üretmez.</p>
+        <ol class="risk-list">
+          <li>Desteklenen ortam, sürüm, Lightpanda binary ve agent-browser doğrulandı mı?</li>
+          <li>Mevcut ayar ve çalışan Chrome/auto yolu kaydedildi mi?</li>
+          <li>Aynı görev, izinli URL kümesi, başarı ölçütü, süre/RAM ve hata alanları tanımlı mı?</li>
+          <li>Telemetri varsayılanı ve <code>LIGHTPANDA_DISABLE_TELEMETRY=true</code> kapatma yolu görünür mü?</li>
+          <li>Ürünün Beta/WIP olduğu, hata ve çökme ihtimali açık mı?</li>
+          <li>URL'ler için izin, robots.txt, kullanım şartları ve hız sınırı kontrol edildi mi?</li>
+          <li>Özel hesap, çerez, anahtar veya özel URL örneğe girmiyor mu?</li>
+        </ol>
+        <div class="claim" aria-label="Telemetri ve ürün olgunluğu kanıt etiketi">
+          <p><strong>Resmî özellik / sınır:</strong> Telemetri kapatma yolu, Beta/WIP uyarısı ve kurulumla ilişkili koşullar gerçek denemeden önce kontrol edilmelidir.</p>
+          <p><strong>Sahip:</strong> Lightpanda belgeleri · <strong>Koşul:</strong> test edilen nightly sürüm · <strong>Kaynak:</strong> <a href="https://lightpanda.io/docs/open-source/installation">kurulum belgesi</a> · <strong>KarıncaAI durumu:</strong> telemetri kapalı geçici VPS binary ile izole test yapıldı; Hermes kalıcı ayarı değiştirilmedi.</p>
+        </div>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m11" aria-labelledby="success-stop">
+        <h2 id="success-stop" tabindex="-1">Çalıştığını nasıl kanıtlarsın, ne zaman durursun?</h2>
+        <p><strong>Başarı kanıtı:</strong> süre + tepe RAM + görev başarısı + hata oranı + fallback sayısı. Yalnız ayarın hata vermemesi başarı değildir.</p>
+        <p><strong>Yakın hata:</strong> ayar <code>lightpanda</code>, fakat motor bulunmuyor. <strong>İlk güvenli kontrol:</strong> binary ve sürücü varlığını doğrula. <strong>Durma:</strong> kurulumu körlemesine tekrarlama; <code>auto</code> yolunu koru.</p>
+        <div class="feedback">
+          <button class="feedback-button" id="feedback-button" type="button" aria-expanded="false" aria-controls="feedback-status">Geri bildirim sınırını göster</button>
+          <p class="feedback-status" id="feedback-status" hidden>Bu yerel demoda geri bildirim kaydedilmez. Bir kayıt hedefi yazılıp aynı kayıt kimliği geri okunmadıkça “Not edildi” denmez.</p>
+        </div>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m12" aria-labelledby="recall">
+        <h2 id="recall" tabindex="-1">Kararını geri çağır ve başka göreve aktar</h2>
+        <p>Rehbere bakmadan şunları söyleyebiliyorsan kılavuzun bu sürümünün bitiş çizgisine geldin:</p>
+        <ol class="compact-list">
+          <li>Lightpanda'yı bir cümleyle tanımla.</li>
+          <li>Bir uygun ve bir uygun olmayan görevi ayır.</li>
+          <li>Üretici testi ile yerel testi ayır.</li>
+          <li>Kendi yolunu ve ilk güvenli adımını söyle.</li>
+          <li>Farklı bir web görevine aynı dört soruyu uygula.</li>
+        </ol>
+        <p>Zorunlu kanıt alanı yoksa sonuç “eksik veri”dir. Altı kutuyu işaretlemek, tek başına karar briefi hazırlamaz.</p>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+
+      <section id="m13" aria-labelledby="sources">
+        <h2 id="sources" tabindex="-1">Kaynaklar ve değişiklik kaydı</h2>
+        <p><strong>Değişiklik kaydı:</strong> V1 görev-kılavuzu seçildi; klavye/JS-off/320–1440 QA geçti; 30 Ağustos 2026 izole VPS A/B sonucu eklendi. Bu sayfa kalıcı Hermes ayarı veya X yayın izni değildir.</p>
+        <h3>Resmî ürün ve benchmark kaynakları</h3>
+        <ul class="compact-list">
+          <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/browser">Hermes Browser Automation</a> — resmi davranış ve geri dönüş bağlamı.</li>
+          <li><a href="https://lightpanda.io/docs/guides/use-hermes">Lightpanda + Hermes rehberi</a> — resmi entegrasyon bağlamı.</li>
+          <li><a href="https://lightpanda.io/docs/open-source/installation">Lightpanda kurulum belgesi</a> — gerçek denemeden önce incelenecek sürüm/koşul.</li>
+          <li><a href="https://lightpanda.io/blog/posts/from-local-to-real-world-benchmarks">Lightpanda benchmark koşulları</a> — üretici testi; KarıncaAI yerel sonucu değildir.</li>
+          <li><a href="benchmark-report.md">KarıncaAI VPS A/B raporu</a> — 20 yerel görev, yöntem, ham veri ve sınırlar.</li>
+        </ul>
+        <h3>KarıncaAI test kayıtları</h3>
+        <ul class="compact-list">
+          <li><a href="https://github.com/KemalG-u/karincaai-lightpanda-rehberi/blob/main/benchmark-report.md">VPS A/B yöntemi, sonuçları ve sınırları</a></li>
+          <li><a href="benchmark-data.json">Makinece okunabilir ham benchmark verisi</a></li>
+        </ul>
+        <a class="section-return" href="#map-title">Bölüm haritasına dön</a>
+      </section>
+    </main>
+
+    <aside aria-label="Bölüm rayı">
+      <nav class="rail" aria-label="Ana bölüm rayı">
+        <p>Bu rehberde</p>
+        <ol>
+          <li><a href="#system">Sistem nasıl çalışır?</a></li>
+          <li><a href="#worked-example">Tam örnek</a></li>
+          <li><a href="#decision">4 soruda yol seç</a></li>
+          <li><a href="#comparison">Karşılaştır</a></li>
+          <li><a href="#safety">Güvenli sınır</a></li>
+          <li><a href="#success-stop">Başarı / dur</a></li>
+          <li><a href="#recall">Geri çağır</a></li>
+        </ol>
+      </nav>
+    </aside>
+  </div>
+
+  <footer><div class="footer-inner"><p>KarıncaAI · Lightpanda görev kılavuzu · v2.1-review</p><p>Arayüz QA ve izole VPS A/B tamamlandı. Gerçek site uyumluluğu, öğrenme testi, public URL ve X yayın izni ayrı kapılardır.</p></div></footer>
+
+  <script>
+    (() => {
+      const mapButton = document.querySelector('.map-toggle');
+      const mapList = document.getElementById('map-list');
+      const feedbackButton = document.getElementById('feedback-button');
+      const feedbackStatus = document.getElementById('feedback-status');
+      if (mapButton && mapList) {
+        const updateMap = (expanded) => {
+          mapButton.setAttribute('aria-expanded', String(expanded));
+          mapButton.textContent = expanded ? 'Bölümleri gizle' : 'Bölümleri göster';
+          mapList.hidden = !expanded;
+        };
+        updateMap(false);
+        mapButton.addEventListener('click', () => updateMap(mapButton.getAttribute('aria-expanded') !== 'true'));
+      }
+      if (feedbackButton && feedbackStatus) {
+        feedbackButton.addEventListener('click', () => {
+          const expanded = feedbackButton.getAttribute('aria-expanded') !== 'true';
+          feedbackButton.setAttribute('aria-expanded', String(expanded));
+          feedbackStatus.hidden = !expanded;
+          feedbackButton.textContent = expanded ? 'Geri bildirim sınırını gizle' : 'Geri bildirim sınırını göster';
+        });
+      }
+
+      const questions = [
+        { id: 'q1', text: 'Desteklenen Linux/WSL2 ortamı var mı?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } },
+        { id: 'q2', text: 'Görevin kritik görsel, dosya veya tam uyum ihtiyacı var mı?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } },
+        { id: 'q3', text: 'Görev tekrarlı mı ve gerçek kaynak darboğazı ölçüldü mü?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } },
+        { id: 'q4', text: 'Aynı görev ve URL kümesiyle geri alınabilir A/B yapılabilir mi?', labels: { yes: 'Evet', no: 'Hayır', unknown: 'Bilmiyorum' } }
+      ];
+      const answers = [];
+      const stepCount = document.getElementById('step-count');
+      const answerSummary = document.getElementById('answer-summary');
+      const questionHeading = document.getElementById('question-heading');
+      const answerSet = document.getElementById('answer-set');
+      const backButton = document.getElementById('back-button');
+      const result = document.getElementById('decision-result');
+      const resultTitle = document.getElementById('result-title');
+      const resultPath = document.getElementById('result-path');
+      const resultAnswers = document.getElementById('result-answers');
+      const resultReason = document.getElementById('result-reason');
+      const resultNext = document.getElementById('result-next');
+      const resultStop = document.getElementById('result-stop');
+      if (!questionHeading || !answerSet) return;
+
+      const outcomeFor = () => {
+        const a = Object.fromEntries(answers.map(item => [item.id, item.answer]));
+        if (a.q1 !== 'yes') return { path: 'Önce ölç ve ortamı hazırla', reason: 'Desteklenen ortam kanıtı yokken motor seçimi güvenli değildir.', next: 'Linux/WSL2 uygunluğunu, sürümü ve mevcut Chrome/auto yolunu salt-okunur kontrol et.', stop: 'Ortam doğrulanmadan browser ayarını değiştirme.' };
+        if (a.q2 === 'yes') return { path: 'Chrome/auto yolunda kal', reason: 'Kritik görsel, dosya veya tam uyum ihtiyacı görev başarısının parçasıdır.', next: 'Görev kanıtını mevcut Chrome/auto yolunda kaydet.', stop: 'Bu ihtiyaç kalkmadan hafif motor denemesi planlama.' };
+        if (a.q2 === 'unknown' || a.q3 !== 'yes') return { path: 'Önce ölç ve ortamı hazırla', reason: 'Görsel ihtiyacı veya ölçülmüş kaynak darboğazı belirsiz; adaylık kanıtlanmadı.', next: 'Aynı görevde Chrome taban çizgisi, süre ve tepe RAM alanlarını kaydet.', stop: 'Üretici benchmarkını yerel sonuç gibi kullanma.' };
+        if (a.q4 !== 'yes') return { path: 'Önce ölç ve ortamı hazırla', reason: 'Geri alınabilir aynı görev/URL kümesi olmadan A/B sonucu karşılaştırılamaz.', next: 'İzinli URL kümesini, başarı ölçütünü, hata alanlarını ve geri alma yolunu yaz.', stop: 'Geri dönüş yolu yokken motor değişikliği yapma.' };
+        return { path: 'Şimdi deneme planla', reason: 'Ortam, görev ihtiyacı, ölçülmüş darboğaz ve geri alınabilir A/B koşulları aynı anda olumlu.', next: 'Mevcut Chrome/auto yolunu kaydet ve kontrollü pilot için ayrı, açık onay iste.', stop: 'Pilot dışında ayar yayma; hata veya başarısız görevde auto yoluna dön.' };
+      };
+      const visibleQuestion = () => questions[answers.length];
+      const renderQuestion = (focus = false) => {
+        const question = visibleQuestion();
+        result.hidden = true;
+        answerSet.hidden = false;
+        stepCount.textContent = `Soru ${answers.length + 1} / 4`;
+        answerSummary.textContent = answers.length ? `${answers.length} cevap kaydedildi` : 'Henüz cevap yok';
+        questionHeading.textContent = question.text;
+        answerSet.innerHTML = '';
+        Object.entries(question.labels).forEach(([value, label]) => {
+          const button = document.createElement('button');
+          button.type = 'button'; button.dataset.answer = value; button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-describedby', 'question-heading'); button.textContent = label;
+          answerSet.append(button);
+        });
+        backButton.hidden = answers.length === 0;
+        if (focus) setTimeout(() => answerSet.querySelector('button')?.focus(), 0);
+      };
+      const renderResult = () => {
+        const outcome = outcomeFor();
+        answerSet.hidden = true;
+        stepCount.textContent = `Tamamlandı: ${answers.length} / 4 soru`;
+        answerSummary.textContent = 'Cevap özeti aşağıda';
+        resultPath.textContent = outcome.path;
+        resultAnswers.textContent = answers.map(item => `${item.id.toUpperCase()}: ${questions.find(q => q.id === item.id).labels[item.answer]}`).join(' · ');
+        resultReason.textContent = outcome.reason;
+        resultNext.textContent = outcome.next;
+        resultStop.textContent = outcome.stop;
+        result.hidden = false;
+        backButton.hidden = false;
+        resultTitle.focus();
+      };
+      answerSet.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-answer]');
+        if (!button) return;
+        const question = visibleQuestion();
+        answers.push({ id: question.id, answer: button.dataset.answer });
+        const terminalPath = answers.length === 1 && answers[0].answer !== 'yes'
+          || answers.length === 2 && answers[1].answer !== 'no'
+          || answers.length === 3 && answers[2].answer !== 'yes'
+          || answers.length === questions.length;
+        if (terminalPath) renderResult();
+        else renderQuestion(true);
+      });
+      backButton.addEventListener('click', () => {
+        if (!answers.length) return;
+        answers.pop();
+        renderQuestion(true);
+      });
+      renderQuestion(false);
+    })();
+  </script>
+</body>
+</html>
+
+

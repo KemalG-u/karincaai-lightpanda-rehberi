@@ -1,0 +1,505 @@
+{
+  "status": "PASS",
+  "method": "persistent isolated CDP engines; same local deterministic JS pages; navigation until 200 DOM items and data-ready=true; process-tree RSS sampled at 5ms",
+  "telemetry": "Lightpanda disabled with LIGHTPANDA_DISABLE_TELEMETRY=true",
+  "versions": {
+    "lightpanda": {
+      "Browser": "Lightpanda/1.0",
+      "Protocol-Version": "1.3",
+      "User-Agent": "Lightpanda/1.0",
+      "Lightpanda-Version": "1.0.0-nightly.9002+1bd957d07",
+      "webSocketDebuggerUrl": "ws://127.0.0.1:9223/"
+    },
+    "chrome": {
+      "Browser": "Chrome/146.0.7680.164",
+      "Protocol-Version": "1.3",
+      "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/146.0.0.0 Safari/537.36",
+      "V8-Version": "14.6.202.26",
+      "WebKit-Version": "537.36 (@bbd8c5dd25fb2f569d98e626a9517cf2171abdff)",
+      "webSocketDebuggerUrl": "ws://127.0.0.1:9224/devtools/browser/42e593e7-0759-4452-9da0-262020b34377"
+    }
+  },
+  "baselines": {
+    "lightpanda": {
+      "rss_kb": 24756,
+      "root_pid": 3627978,
+      "process_count": 1
+    },
+    "chrome": {
+      "rss_kb": 1024828,
+      "root_pid": 3627239,
+      "process_count": 12
+    }
+  },
+  "records": [
+    {
+      "elapsed_s": 0.003499,
+      "peak_total_rss_kb": 24592,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 1",
+      "engine": "lightpanda",
+      "run": 1,
+      "page": 1
+    },
+    {
+      "elapsed_s": 0.022071,
+      "peak_total_rss_kb": 1044964,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 1",
+      "engine": "chrome",
+      "run": 1,
+      "page": 1
+    },
+    {
+      "elapsed_s": 0.025915,
+      "peak_total_rss_kb": 1050572,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 2",
+      "engine": "chrome",
+      "run": 2,
+      "page": 2
+    },
+    {
+      "elapsed_s": 0.007688,
+      "peak_total_rss_kb": 24620,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 2",
+      "engine": "lightpanda",
+      "run": 2,
+      "page": 2
+    },
+    {
+      "elapsed_s": 0.004325,
+      "peak_total_rss_kb": 24700,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 3",
+      "engine": "lightpanda",
+      "run": 3,
+      "page": 3
+    },
+    {
+      "elapsed_s": 0.025426,
+      "peak_total_rss_kb": 1056116,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 3",
+      "engine": "chrome",
+      "run": 3,
+      "page": 3
+    },
+    {
+      "elapsed_s": 0.021294,
+      "peak_total_rss_kb": 1063348,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 4",
+      "engine": "chrome",
+      "run": 4,
+      "page": 4
+    },
+    {
+      "elapsed_s": 0.00528,
+      "peak_total_rss_kb": 24716,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 4",
+      "engine": "lightpanda",
+      "run": 4,
+      "page": 4
+    },
+    {
+      "elapsed_s": 0.006674,
+      "peak_total_rss_kb": 24724,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 5",
+      "engine": "lightpanda",
+      "run": 5,
+      "page": 5
+    },
+    {
+      "elapsed_s": 0.022394,
+      "peak_total_rss_kb": 1068304,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 5",
+      "engine": "chrome",
+      "run": 5,
+      "page": 5
+    },
+    {
+      "elapsed_s": 0.031633,
+      "peak_total_rss_kb": 1072600,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 6",
+      "engine": "chrome",
+      "run": 6,
+      "page": 6
+    },
+    {
+      "elapsed_s": 0.006241,
+      "peak_total_rss_kb": 24732,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 6",
+      "engine": "lightpanda",
+      "run": 6,
+      "page": 6
+    },
+    {
+      "elapsed_s": 0.006741,
+      "peak_total_rss_kb": 24764,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 7",
+      "engine": "lightpanda",
+      "run": 7,
+      "page": 7
+    },
+    {
+      "elapsed_s": 0.028709,
+      "peak_total_rss_kb": 1075776,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 7",
+      "engine": "chrome",
+      "run": 7,
+      "page": 7
+    },
+    {
+      "elapsed_s": 0.027692,
+      "peak_total_rss_kb": 1078528,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 8",
+      "engine": "chrome",
+      "run": 8,
+      "page": 8
+    },
+    {
+      "elapsed_s": 0.013288,
+      "peak_total_rss_kb": 24776,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 8",
+      "engine": "lightpanda",
+      "run": 8,
+      "page": 8
+    },
+    {
+      "elapsed_s": 0.003675,
+      "peak_total_rss_kb": 24728,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 9",
+      "engine": "lightpanda",
+      "run": 9,
+      "page": 9
+    },
+    {
+      "elapsed_s": 0.024433,
+      "peak_total_rss_kb": 1084596,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8607,
+      "title": "KarıncaAI browser benchmark 9",
+      "engine": "chrome",
+      "run": 9,
+      "page": 9
+    },
+    {
+      "elapsed_s": 0.025698,
+      "peak_total_rss_kb": 1091252,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8812,
+      "title": "KarıncaAI browser benchmark 10",
+      "engine": "chrome",
+      "run": 10,
+      "page": 10
+    },
+    {
+      "elapsed_s": 0.005511,
+      "peak_total_rss_kb": 24732,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8812,
+      "title": "KarıncaAI browser benchmark 10",
+      "engine": "lightpanda",
+      "run": 10,
+      "page": 10
+    },
+    {
+      "elapsed_s": 0.006268,
+      "peak_total_rss_kb": 24772,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8812,
+      "title": "KarıncaAI browser benchmark 11",
+      "engine": "lightpanda",
+      "run": 11,
+      "page": 11
+    },
+    {
+      "elapsed_s": 0.026852,
+      "peak_total_rss_kb": 1089320,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8812,
+      "title": "KarıncaAI browser benchmark 11",
+      "engine": "chrome",
+      "run": 11,
+      "page": 11
+    },
+    {
+      "elapsed_s": 0.027125,
+      "peak_total_rss_kb": 1092216,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 12",
+      "engine": "chrome",
+      "run": 12,
+      "page": 12
+    },
+    {
+      "elapsed_s": 0.004106,
+      "peak_total_rss_kb": 24768,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 12",
+      "engine": "lightpanda",
+      "run": 12,
+      "page": 12
+    },
+    {
+      "elapsed_s": 0.003757,
+      "peak_total_rss_kb": 24732,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 13",
+      "engine": "lightpanda",
+      "run": 13,
+      "page": 13
+    },
+    {
+      "elapsed_s": 0.020128,
+      "peak_total_rss_kb": 1094884,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 13",
+      "engine": "chrome",
+      "run": 13,
+      "page": 13
+    },
+    {
+      "elapsed_s": 0.026127,
+      "peak_total_rss_kb": 1098172,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 14",
+      "engine": "chrome",
+      "run": 14,
+      "page": 14
+    },
+    {
+      "elapsed_s": 0.006863,
+      "peak_total_rss_kb": 24744,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 14",
+      "engine": "lightpanda",
+      "run": 14,
+      "page": 14
+    },
+    {
+      "elapsed_s": 0.004704,
+      "peak_total_rss_kb": 24760,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 15",
+      "engine": "lightpanda",
+      "run": 15,
+      "page": 15
+    },
+    {
+      "elapsed_s": 0.023932,
+      "peak_total_rss_kb": 1101740,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 15",
+      "engine": "chrome",
+      "run": 15,
+      "page": 15
+    },
+    {
+      "elapsed_s": 0.023366,
+      "peak_total_rss_kb": 1103584,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 16",
+      "engine": "chrome",
+      "run": 16,
+      "page": 16
+    },
+    {
+      "elapsed_s": 0.006705,
+      "peak_total_rss_kb": 24776,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 16",
+      "engine": "lightpanda",
+      "run": 16,
+      "page": 16
+    },
+    {
+      "elapsed_s": 0.003685,
+      "peak_total_rss_kb": 24748,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 17",
+      "engine": "lightpanda",
+      "run": 17,
+      "page": 17
+    },
+    {
+      "elapsed_s": 0.021653,
+      "peak_total_rss_kb": 1106792,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 17",
+      "engine": "chrome",
+      "run": 17,
+      "page": 17
+    },
+    {
+      "elapsed_s": 0.020874,
+      "peak_total_rss_kb": 1109340,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 18",
+      "engine": "chrome",
+      "run": 18,
+      "page": 18
+    },
+    {
+      "elapsed_s": 0.003883,
+      "peak_total_rss_kb": 24764,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 18",
+      "engine": "lightpanda",
+      "run": 18,
+      "page": 18
+    },
+    {
+      "elapsed_s": 0.004662,
+      "peak_total_rss_kb": 24764,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 19",
+      "engine": "lightpanda",
+      "run": 19,
+      "page": 19
+    },
+    {
+      "elapsed_s": 0.024833,
+      "peak_total_rss_kb": 1113892,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 19",
+      "engine": "chrome",
+      "run": 19,
+      "page": 19
+    },
+    {
+      "elapsed_s": 0.026072,
+      "peak_total_rss_kb": 1114788,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 20",
+      "engine": "chrome",
+      "run": 20,
+      "page": 20
+    },
+    {
+      "elapsed_s": 0.004163,
+      "peak_total_rss_kb": 24756,
+      "success": true,
+      "item_count": 200,
+      "output_bytes": 8811,
+      "title": "KarıncaAI browser benchmark 20",
+      "engine": "lightpanda",
+      "run": 20,
+      "page": 20
+    }
+  ],
+  "summary": {
+    "lightpanda": {
+      "runs": 20,
+      "successes": 20,
+      "elapsed_mean_s": 0.005586,
+      "elapsed_median_s": 0.004992,
+      "elapsed_p95_s": 0.007688,
+      "baseline_total_rss_mb": 24.176,
+      "peak_total_rss_median_mb": 24.166,
+      "peak_delta_rss_median_mb": 0.0,
+      "process_count_baseline": 1
+    },
+    "chrome": {
+      "runs": 20,
+      "successes": 20,
+      "elapsed_mean_s": 0.024811,
+      "elapsed_median_s": 0.025129,
+      "elapsed_p95_s": 0.028709,
+      "baseline_total_rss_mb": 1000.809,
+      "peak_total_rss_median_mb": 1064.732,
+      "peak_delta_rss_median_mb": 63.924,
+      "process_count_baseline": 12
+    },
+    "comparison": {
+      "chrome_to_lightpanda_median_time_ratio": 5.034,
+      "chrome_to_lightpanda_baseline_rss_ratio": 41.397,
+      "chrome_to_lightpanda_peak_delta_rss_ratio": null
+    }
+  }
+}

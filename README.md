@@ -7,6 +7,7 @@ Lightpanda'nın ne olduğunu, hangi görevlerde kullanılabileceğini ve Chrome/
 - `index.html`: yayın sayfası
 - `assets/b2-signature.png`: KarıncaAI B2 imzası
 - `assets/benchmark-vps.png`: KarıncaAI VPS benchmark grafiği
+- `assets/social-preview.png`: X/link paylaşımı için 1200×628 sosyal önizleme kartı
 - `benchmark-report.md`: yöntem, sonuç ve sınırlar
 - `benchmark-data.json`: ham benchmark verisi
 

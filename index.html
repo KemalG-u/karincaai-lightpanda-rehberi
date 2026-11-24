@@ -373,7 +373,7 @@
         </div>
         <figure class="benchmark-figure">
           <img src="assets/benchmark-vps.png" alt="KarıncaAI VPS testinde Lightpanda 4,992 milisaniye, Chrome 25,129 milisaniye medyan süre; başlangıç process-tree belleği Lightpanda 24,176 MB ve Chrome 1.000,809 MB.">
-          <figcaption>Aynı VPS ve aynı 20 görev. Ham veri ve yöntem proje içindeki `benchmarks/lightpanda-vs-chrome` klasöründe.</figcaption>
+          <figcaption>Aynı VPS ve aynı 20 görev. Ham veri: <a href="https://github.com/KemalG-u/karincaai-lightpanda-rehberi/blob/main/benchmark-data.json"><code>benchmark-data.json</code></a>; yöntem ve sonuçlar: <a href="https://github.com/KemalG-u/karincaai-lightpanda-rehberi/blob/main/benchmark-report.md"><code>benchmark-report.md</code></a>.</figcaption>
         </figure>
         <p><strong>Test protokolü:</strong> Motorlar sürekli açık tutuldu; aynı 20 yerel sayfa kullanıldı; her sayfa 200 DOM öğesi ve <code>data-ready=true</code> kanıtı üretti; motor sırası her turda değiştirildi; süre medyan/p95 ile, bellek bütün süreç ağacının RSS toplamıyla ölçüldü.</p>
         <p><strong>Çıktı doğruluğu:</strong> Bu sentetik görevde iki motorun çıktısı ancak 200 kaydın tamamı, gerekli alanlar ve hazır işareti eşleşirse doğru sayıldı. Gerçek görev için ayrıca normalizasyon ve tolerans, beklenen kayıt sayısı, yinelenen kayıt politikası ve kısmi hata ölçütü yazılmalıdır.</p>

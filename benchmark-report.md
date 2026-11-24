@@ -2,7 +2,7 @@
 
 **Tarih:** 30 Ağustos 2026  
 **Durum:** Gerçek motor testi tamamlandı  
-**Ham veri:** `results-vps-2026-08-30.json`  
+**Ham veri:** `benchmark-data.json` (bu depodaki kopya)  
 **Telemetri:** `LIGHTPANDA_DISABLE_TELEMETRY=true`
 
 ## Sonuç
@@ -103,4 +103,5 @@ Yine de genel öneri değişmiyor:
 - Sayfa üretici: `site/generate_pages.py`
 - Cold-start denemesi: `run_benchmark.py` — VPS Chrome `--dump-dom` modunda VAAPI/shared-memory hatasıyla zaman aşımına uğradı; nihai veri olarak kullanılmadı.
 - Başarılı yöntem: `run_cdp_benchmark.py`
-- Ham sonuç: `results-vps-2026-08-30.json`
+- Ham sonuç: `benchmark-data.json`
+- Not: `generate_pages.py`, `run_benchmark.py` ve `run_cdp_benchmark.py` betikleri bu depoda yer almaz; yöntem yukarıda anlatılmıştır, betikler yayımlanmadan sonuç bağımsız olarak yeniden üretilemez.
